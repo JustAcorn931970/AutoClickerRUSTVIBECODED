@@ -1,0 +1,10 @@
+Project review performed while packaging:
+- Reviewed the profile-to-settings mapping and default profile values.
+- Added input-rate clamping (30 CPS for regular profiles; 40 CPS maximum for TPS mode).
+- Added a dedicated input thread with short sleeps rather than a busy-spin loop, plus a 350 ms activation grace period.
+- Added atomic run/stop state and a shutdown flag; the app joins its worker thread on close.
+- Avoided unwrap() on mouse initialisation, click injection, settings loading/saving, and input-thread startup.
+- Added unit tests for safe rate clamping, the TPS defaults and keybind activation defaults.
+
+Not verified in this build environment:
+- Rust/Cargo are not installed here, and outbound DNS/network access is unavailable. Therefore cargo fmt, cargo test, cargo check and an actual Windows executable build could not be run here. Run the developer checks in README.md on a Windows PC with Rust installed.
